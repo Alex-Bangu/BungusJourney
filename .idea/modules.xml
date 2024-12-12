@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/BungusJourney.iml" filepath="$PROJECT_DIR$/.idea/BungusJourney.iml" />
+      <module fileurl="file://$PROJECT_DIR$/resources/resources.iml" filepath="$PROJECT_DIR$/resources/resources.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sources/sources.iml" filepath="$PROJECT_DIR$/sources/sources.iml" />
+      <module fileurl="file://$PROJECT_DIR$/untitled/untitled.iml" filepath="$PROJECT_DIR$/untitled/untitled.iml" />
     </modules>
   </component>
 </project>

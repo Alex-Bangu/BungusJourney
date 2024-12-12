@@ -1,32 +1,32 @@
 package BungusJourney;
 
+import entity.Player;
+import tile.TileManager;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
 
     // Screen Settings
-    private final int originalTileSize = 16; // 16x16 tile
-    private final int scale = 3;
+    private final int OG_TILE_SIZE = 16; // 16x16 tile
+    private final int SCALE = 3;
 
-    private final int tileSize = originalTileSize * scale; // 48x48 tile
-    private final int maxScreenCol = 18;
-    private final int maxScreenRow = 15;
-    private final int screenWitdth = maxScreenCol * tileSize;
-    private final int screenHeight = maxScreenRow * tileSize;
+    public final int TILE_SIZE = OG_TILE_SIZE * SCALE; // 48x48 tile
+    public final int MAX_SCREEN_COL = 18;
+    public final int MAX_SCREEN_ROW = 15;
+    public final int SCREEN_WIDTH = MAX_SCREEN_COL * TILE_SIZE;
+    public final int SCREEN_HEIGHT = MAX_SCREEN_ROW * TILE_SIZE;
 
     private final int fps = 60;
 
+    TileManager tileM = new TileManager(this);
     private KeyHandler KeyH = new KeyHandler();
     private Thread gameThread;
-
-    // Set player default position
-    private int playerX = 100;
-    private int playerY = 100;
-    private int playerSpeed = 4;
+    private Player player = new Player(this, KeyH);
 
     public GamePanel() {
-        this.setPreferredSize(new Dimension(screenWitdth, screenHeight));
+        this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.addKeyListener(KeyH);
@@ -72,22 +72,14 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        if(KeyH.upPressed == true) {
-            playerY -= playerSpeed;
-        }if(KeyH.downPressed == true) {
-            playerY += playerSpeed;
-        }if(KeyH.leftPressed == true) {
-            playerX -= playerSpeed;
-        }if(KeyH.rightPressed == true) {
-            playerX += playerSpeed;
-        }
+        player.update();
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(Color.white);
-        g2d.fillRect(playerX, playerY, tileSize, tileSize);
+        tileM.draw(g2d);
+        player.draw(g2d);
         g2d.dispose();
     }
 }
